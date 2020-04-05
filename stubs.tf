@@ -35,10 +35,10 @@ resource "aws_instance" "stubs" {
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.stubs_sg.id]
   subnet_id = var.subnet_id
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   key_name = var.key_pair_name
   tags = {
-    Name = "${terraform.workspace} stubs tech-pod hack day"
+    Name = "${terraform.workspace} stubs tech-pod"
     Env = terraform.workspace
     TerraformConfiguration = local.terraform_configuration
   }
