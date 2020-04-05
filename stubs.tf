@@ -38,7 +38,7 @@ resource "aws_instance" "stubs" {
   associate_public_ip_address = true
   key_name = var.key_pair_name
   tags = {
-    Name = "${terraform.workspace} stubs"
+    Name = "${terraform.workspace} stubs hack day"
     Env = terraform.workspace
     TerraformConfiguration = local.terraform_configuration
   }
