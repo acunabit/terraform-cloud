@@ -1,5 +1,5 @@
 variable "account_id" {
-  default = "723236915308"
+  type = string
 }
 
 variable "ami_id" {
@@ -19,5 +19,9 @@ variable "vpc_id" {
 }
 
 variable "subnet_id" {
+  type = string
+}
+
+variable "instance_type" {
   type = string
 }

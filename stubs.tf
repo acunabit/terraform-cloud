@@ -8,10 +8,6 @@ data "aws_ami" "stubs_ami" {
   }
 }
 
-variable "instance_type" {
-  type = string
-}
-
 resource "aws_security_group" "stubs_sg" {
   name = "${terraform.workspace}-stubs-sg"
   description = "${terraform.workspace} stubs sg"
