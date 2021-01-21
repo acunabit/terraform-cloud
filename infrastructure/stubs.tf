@@ -1,6 +1,6 @@
 data "aws_ami" "stubs_ami" {
   most_recent = true
-  owners = ["self"]
+  owners = ["public"]
 
   filter {
     name = "image-id"
