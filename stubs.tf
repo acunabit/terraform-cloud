@@ -60,7 +60,7 @@ module "test_mysql" {
   application_user = "testuser"
   # MySQL host (i.e. route53 dns entry)
   cname = "k8s-test-db"
-  database_name = "paylater"
+  database_name = "k8s-test"
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8s-test"
