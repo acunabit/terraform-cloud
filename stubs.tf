@@ -49,7 +49,7 @@ resource "aws_instance" "stubs" {
 }
 
 module "test_mysql" {
-  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git/database?ref=master"
+  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database?ref=master"
   
   state_bucket = "afterpay.alpha.tfstate"
   environment = "k8s"
