@@ -48,3 +48,27 @@ resource "aws_instance" "stubs" {
   }
 }
 
+module "test_mysql" {
+  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database?ref=master"
+  
+  state_bucket = "afterpay.alpha.tfstate"
+  environment = "k8s"
+
+  account_id = var.account_id
+  account_name = "beta"
+  application_role_arn = "arn:aws:iam::${var.account_id}:role/paylaterEcsFargateTaskExecutionRole"
+  application_user = "testuser"
+  # MySQL host (i.e. route53 dns entry)
+  cname = "k8s-test-db"
+  database_name = "paylater"
+  iam_database_authentication_enabled = false
+  # The cluster name will follow this convention -> environment-identifier-db
+  identifier = "k8s-test"
+  instance_class = "db.t3.small"
+  instance_count = 1
+  monitoring_interval = 0
+  preferred_backup_window = "17:00-18:00"
+  preferred_maintenance_window = "wed:16:00-wed:16:30"
+  terraform_configuration = "paylater-containers"
+  terraform_role_name = "terraform-paylater-deploynow-ecs"
+}
