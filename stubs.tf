@@ -49,13 +49,13 @@ resource "aws_instance" "stubs" {
 }
 
 module "test_mysql" {
-  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database?ref=master"
+  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database"
   
   state_bucket = "afterpay.alpha.tfstate"
   environment = "k8s"
 
   account_id = var.account_id
-  account_name = "beta"
+  account_name = "alpha"
   application_role_arn = "arn:aws:iam::${var.account_id}:role/paylaterEcsFargateTaskExecutionRole"
   application_user = "testuser"
   # MySQL host (i.e. route53 dns entry)
