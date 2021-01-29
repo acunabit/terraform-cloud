@@ -52,7 +52,7 @@ module "test_mysql" {
   source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database"
   
   state_bucket = "afterpay.${var.account_name}.tfstate"
-  environment = "k8s"
+  environment = "dev"
 
   account_id = var.account_id
   account_name = var.account_name
