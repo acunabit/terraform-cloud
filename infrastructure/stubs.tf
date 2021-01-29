@@ -1,6 +1,6 @@
 data "aws_ami" "stubs_ami" {
   most_recent = true
-  owners = ["007561666938"]
+  owners = ["568431661506"]
 
   filter {
     name = "image-id"
@@ -49,21 +49,21 @@ resource "aws_instance" "stubs" {
 }
 
 module "test_mysql" {
-  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database?ref=master"
+  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database"
   
-  state_bucket = "afterpay.alpha.tfstate"
-  environment = "k8s"
+  state_bucket = "afterpay.${var.account_name}.tfstate"
+  environment = "dev"
 
   account_id = var.account_id
-  account_name = "beta"
+  account_name = var.account_name
   application_role_arn = "arn:aws:iam::${var.account_id}:role/paylaterEcsFargateTaskExecutionRole"
   application_user = "testuser"
   # MySQL host (i.e. route53 dns entry)
   cname = "k8s-test-db"
-  database_name = "paylater"
+  database_name = "k8stest"
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
-  identifier = "k8s-test"
+  identifier = "k8stest"
   instance_class = "db.t3.small"
   instance_count = 1
   monitoring_interval = 0
@@ -72,6 +72,3 @@ module "test_mysql" {
   terraform_configuration = "paylater-containers"
   terraform_role_name = "terraform-paylater-deploynow-ecs"
 }
-
-
-
