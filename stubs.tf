@@ -63,7 +63,7 @@ module "test_mysql" {
   database_name = "k8s-test"
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
-  identifier = "k8s-test"
+  identifier = "k8stest"
   instance_class = "db.t3.small"
   instance_count = 1
   monitoring_interval = 0
