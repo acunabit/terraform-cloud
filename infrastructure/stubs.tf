@@ -10,7 +10,7 @@ data "aws_ami" "stubs_ami" {
 
 resource "aws_security_group" "stubs_sg" {
   name = "${terraform.workspace}-stubs-sg"
-  description = "${terraform.workspace} stubs sg"
+  description = "${terraform.workspace} stubs sg2"
   vpc_id = var.vpc_id
 
   tags = {
