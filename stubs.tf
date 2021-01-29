@@ -55,7 +55,7 @@ module "test_mysql" {
   environment = "k8s"
 
   account_id = var.account_id
-  account_name = "alpha"
+  account_name = var.account_name
   application_role_arn = "arn:aws:iam::${var.account_id}:role/paylaterEcsFargateTaskExecutionRole"
   application_user = "testuser"
   # MySQL host (i.e. route53 dns entry)
