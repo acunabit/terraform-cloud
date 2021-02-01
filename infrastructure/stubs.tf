@@ -23,7 +23,7 @@ resource "aws_security_group" "stubs_sg" {
 resource "aws_security_group_rule" "stubs_egress_sg_rule" {
   type = "egress"
   from_port = 0
-  to_port = 65535
+  to_port = 65534
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
