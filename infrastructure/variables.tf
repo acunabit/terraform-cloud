@@ -34,3 +34,8 @@ variable "environment" {
   type = string
   default = "dev"
 }
+
+variable "state_bucket" {
+  type = string
+  default = "afterpay.alpha.tfstate"
+}
