@@ -68,7 +68,7 @@ module "test_mysql" {
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8stest"
   instance_class = "db.t3.medium"
-  instance_count = 1
+  #instance_count = 1
   internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   monitoring_interval = 0
   preferred_backup_window = "17:00-18:00"
