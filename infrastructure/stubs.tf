@@ -84,6 +84,4 @@ module "test_mysql" {
   sns_critical_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_critical_sns_topic_arn  
   terraform_configuration = "paylater-containers"
   terraform_role_name = "terraform-paylater-deploynow-ecs"
-  vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
-  vpc_id = data.terraform_remote_state.network.outputs.vpc_id  
 }
