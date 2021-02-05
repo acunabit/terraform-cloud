@@ -49,7 +49,7 @@ resource "aws_instance" "stubs" {
 }
 
 module "test_mysql" {
-  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//database"
+  source = "git@github.com:AfterpayTouch/afterpay-terraform-modules.git//global-database?ref=CLDP-395"
   
   state_bucket = "afterpay.${var.account_name}.tfstate"
   environment = "dev"
@@ -61,14 +61,29 @@ module "test_mysql" {
   # MySQL host (i.e. route53 dns entry)
   cname = "k8s-test-db"
   database_name = "k8stest"
+  db_ingress_cidr_blocks = [data.aws_subnet.dmz_subnets.*.cidr_block,
+                            data.aws_subnet.core_subnets.*.cidr_block,
+                            data.aws_subnet.bastion_subnet.cidr_block]
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8stest"
-  instance_class = "db.t3.small"
+  instance_class = "db.t3.medium"
   instance_count = 1
+  internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   monitoring_interval = 0
   preferred_backup_window = "17:00-18:00"
   preferred_maintenance_window = "wed:16:00-wed:16:30"
+  primary_subnet_ids = data.terraform_remote_state.network.outputs.data_subnet_ids
+  primary_vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
+  primary_vpc_id = data.terraform_remote_state.network.outputs.vpc_id
+  region = data.terraform_remote_state.network.outputs.region
+  secondary_subnet_ids = data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
+  secondary_vpc_cidr = data.terraform_remote_state.network_secondary.outputs.vpc_cidr
+  secondary_vpc_id = data.terraform_remote_state.network_secondary.outputs.vpc_id  
+  sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
+  sns_critical_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_critical_sns_topic_arn  
   terraform_configuration = "paylater-containers"
   terraform_role_name = "terraform-paylater-deploynow-ecs"
+  vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
+  vpc_id = data.terraform_remote_state.network.outputs.vpc_id  
 }
