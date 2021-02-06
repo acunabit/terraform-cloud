@@ -73,7 +73,7 @@ module "test_mysql" {
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8stest"
-  instance_class = "db.t3.medium"
+  instance_class = "db.r5.large"
   #instance_count = 1
   internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   monitoring_interval = 0
@@ -83,7 +83,7 @@ module "test_mysql" {
   primary_vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
   primary_vpc_id = data.terraform_remote_state.network.outputs.vpc_id
   region = data.terraform_remote_state.network.outputs.region
-  secondary_subnet_ids = ["subnet-60e1de26"] //data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
+  secondary_subnet_ids = ["subnet-60e1de26", "subnet-c1b7b5b7", "subnet-49cad32d"] //data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
   secondary_vpc_cidr = "172.31.0.0/16" //data.terraform_remote_state.network_secondary.outputs.vpc_cidr
   secondary_vpc_id = "vpc-99edb9fd" //data.terraform_remote_state.network_secondary.outputs.vpc_id
   sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
