@@ -31,19 +31,19 @@ data "terraform_remote_state" "network" {
   }
 }
 
-data "terraform_remote_state" "network_secondary" {
-  backend = "s3"
-  workspace = var.environment
-  config = {
-    bucket = var.state_bucket
-    key = local.network_key
-    encrypt = true
-    dynamodb_table = "terraformstatelock"
-    region = "ap-southeast-1"
-    role_arn = "arn:aws:iam::${var.account_id}:role/terraform-state-manager"
-    session_name = "terraform-remote-state-network"
-  }
-}
+//data "terraform_remote_state" "network_secondary" {
+//  backend = "s3"
+//  workspace = var.environment
+//  config = {
+//    bucket = var.state_bucket
+//    key = local.network_key
+//    encrypt = true
+//    dynamodb_table = "terraformstatelock"
+//    region = "ap-southeast-1"
+//    role_arn = "arn:aws:iam::${var.account_id}:role/terraform-state-manager"
+//    session_name = "terraform-remote-state-network"
+//  }
+//}
 
 data "terraform_remote_state" "bastion" {
   backend = "s3"

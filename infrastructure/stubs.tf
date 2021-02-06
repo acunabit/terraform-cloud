@@ -61,7 +61,7 @@ module "test_mysql" {
   # MySQL host (i.e. route53 dns entry)
   cname = "k8s-test-db"
   database_name = "k8stest"
-  db_ingress_cidr_blocks = [
+  db_ingress_cidr_blocks = flatten([
     data.aws_subnet.primary_dmz_subnets.*.cidr_block,
     data.aws_subnet.primary_core_subnets.*.cidr_block,
     data.aws_subnet.primary_bastion_subnet.cidr_block,
@@ -69,7 +69,7 @@ module "test_mysql" {
 //    data.aws_subnet.secondary_dmz_subnets.*.cidr_block,
 //    data.aws_subnet.secondary_core_subnets.*.cidr_block,
 //    data.aws_subnet.secondary_bastion_subnet.cidr_block
-  ]
+  ])
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8stest"
