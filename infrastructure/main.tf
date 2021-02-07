@@ -83,6 +83,11 @@ data "aws_subnet" "primary_core_subnets" {
   id = data.terraform_remote_state.network.outputs.core_subnet_ids[count.index]
 }
 
+data "aws_subnet" "primary_data_subnets" {
+  count = length(data.terraform_remote_state.network.outputs.data_subnet_ids)
+  id = data.terraform_remote_state.network.outputs.data_subnet_ids[count.index]
+}
+
 data "aws_subnet" "primary_bastion_subnet" {
   id = data.terraform_remote_state.network.outputs.bastion_subnet_id
 }

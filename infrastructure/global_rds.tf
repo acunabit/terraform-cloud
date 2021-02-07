@@ -16,6 +16,7 @@ module "test_mysql" {
     data.aws_subnet.primary_dmz_subnets.*.cidr_block,
     data.aws_subnet.primary_core_subnets.*.cidr_block,
     data.aws_subnet.primary_bastion_subnet.cidr_block,
+    data.aws_subnet.primary_data_subnets.cidr_block,
     "172.31.0.0/16"
 //    data.aws_subnet.secondary_dmz_subnets.*.cidr_block,
 //    data.aws_subnet.secondary_core_subnets.*.cidr_block,
