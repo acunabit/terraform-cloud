@@ -86,6 +86,7 @@ module "test_mysql" {
   secondary_subnet_ids = ["subnet-60e1de26", "subnet-c1b7b5b7", "subnet-49cad32d"] //data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
   secondary_vpc_cidr = "172.31.0.0/16" //data.terraform_remote_state.network_secondary.outputs.vpc_cidr
   secondary_vpc_id = "vpc-99edb9fd" //data.terraform_remote_state.network_secondary.outputs.vpc_id
+  secondary_instance_class = "db.r5.large"
   sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
   sns_critical_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_critical_sns_topic_arn  
   terraform_configuration = "paylater-containers"
