@@ -13,13 +13,10 @@ module "test_mysql" {
   cname = "k8s-test-db"
   database_name = "k8stest"
   db_ingress_cidr_blocks = flatten([
-    data.aws_subnet.primary_dmz_subnets.*.cidr_block,
     data.aws_subnet.primary_core_subnets.*.cidr_block,
     data.aws_subnet.primary_bastion_subnet.cidr_block,
+    data.aws_subnet.primary_dmz_subnets.*.cidr_block,
     data.aws_subnet.primary_data_subnets.*.cidr_block,
-    "10.202.222.0/24",
-    "10.202.223.0/24",
-    "10.202.224.0/24",
     "172.31.0.0/16"
 //    data.aws_subnet.secondary_dmz_subnets.*.cidr_block,
 //    data.aws_subnet.secondary_core_subnets.*.cidr_block,
@@ -29,7 +26,6 @@ module "test_mysql" {
   # The cluster name will follow this convention -> environment-identifier-db
   identifier = "k8stest"
   instance_class = "db.r5.large"
-  #instance_count = 1
   internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   monitoring_interval = 0
   preferred_backup_window = "17:00-18:00"
@@ -37,11 +33,13 @@ module "test_mysql" {
   primary_subnet_ids = data.terraform_remote_state.network.outputs.data_subnet_ids
   primary_vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
   primary_vpc_id = data.terraform_remote_state.network.outputs.vpc_id
+  primary_instance_count = 1
   region = data.terraform_remote_state.network.outputs.region
   secondary_subnet_ids = ["subnet-60e1de26", "subnet-c1b7b5b7", "subnet-49cad32d"] //data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
   secondary_vpc_cidr = "172.31.0.0/16" //data.terraform_remote_state.network_secondary.outputs.vpc_cidr
   secondary_vpc_id = "vpc-99edb9fd" //data.terraform_remote_state.network_secondary.outputs.vpc_id
   secondary_instance_class = "db.r5.large"
+  secondary_instance_count = 1
   sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
   sns_critical_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_critical_sns_topic_arn  
   terraform_configuration = "paylater-containers"
