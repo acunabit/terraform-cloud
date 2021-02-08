@@ -33,7 +33,7 @@ module "test_mysql" {
   primary_subnet_ids = data.terraform_remote_state.network.outputs.data_subnet_ids
   primary_vpc_cidr = data.terraform_remote_state.network.outputs.vpc_cidr
   primary_vpc_id = data.terraform_remote_state.network.outputs.vpc_id
-  primary_instance_count = 1
+  primary_instance_count = 2
   region = data.terraform_remote_state.network.outputs.region
   secondary_subnet_ids = ["subnet-60e1de26", "subnet-c1b7b5b7", "subnet-49cad32d"] //data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
   secondary_vpc_cidr = "172.31.0.0/16" //data.terraform_remote_state.network_secondary.outputs.vpc_cidr
