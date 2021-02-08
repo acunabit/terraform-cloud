@@ -69,7 +69,7 @@ module "test_postgres" {
   ])
   iam_database_authentication_enabled = false
   # The cluster name will follow this convention -> environment-identifier-db
-  identifier = "k8stest"
+  identifier = "k8stest2"
   instance_class = "db.r5.large"
   internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   lambda_subnet_ids = data.terraform_remote_state.network.outputs.core_subnet_ids
