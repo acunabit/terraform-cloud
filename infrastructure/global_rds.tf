@@ -16,10 +16,9 @@ module "test_mysql" {
     data.aws_subnet.primary_core_subnets.*.cidr_block,
     data.aws_subnet.primary_bastion_subnet.cidr_block,
     data.aws_subnet.primary_dmz_subnets.*.cidr_block,
-    data.aws_subnet.primary_data_subnets.*.cidr_block,
     "172.31.0.0/16"
 //    data.aws_subnet.secondary_dmz_subnets.*.cidr_block,
-//    data.aws_subnet.secondary_core_subnets.*.cidr_block,
+//    data.aws_subnet.secondgggary_core_subnets.*.cidr_block,
 //    data.aws_subnet.secondary_bastion_subnet.cidr_block
   ])
   iam_database_authentication_enabled = false
@@ -28,6 +27,7 @@ module "test_mysql" {
   instance_class = "db.r5.large"
   internal_hosted_zone_id = data.terraform_remote_state.network.outputs.internal_hosted_zone_id
   monitoring_interval = 0
+  lambda_subnet_id = data.terraform_remote_state.network.outputs.core_subnet_ids
   preferred_backup_window = "17:00-18:00"
   preferred_maintenance_window = "wed:16:00-wed:16:30"
   primary_subnet_ids = data.terraform_remote_state.network.outputs.data_subnet_ids
