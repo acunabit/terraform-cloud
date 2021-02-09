@@ -39,7 +39,8 @@ module "test_mysql" {
   secondary_vpc_id = "vpc-99edb9fd" //data.terraform_remote_state.network_secondary.outputs.vpc_id
   secondary_instance_class = "db.r5.large"
   secondary_instance_count = 1
-  upgraded_secondary_instance_count = 1
+  upgraded_instance_count = 1
+  upgraded_secondary_instance_count = 2
   upgraded_instance_class = "db.r5.xlarge"
   upgraded_promotion_tier = 1
   sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
