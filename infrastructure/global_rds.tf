@@ -30,15 +30,11 @@ module "test_postgres" {
   primary_vpc_id = data.terraform_remote_state.network.outputs.vpc_id
   primary_instance_count = 1
   region = data.terraform_remote_state.network.outputs.region
-  secondary_subnet_ids = data.terraform_remote_state.network_secondary.outputs.data_subnet_ids
-  secondary_vpc_cidr = data.terraform_remote_state.network_secondary.outputs.vpc_cidr
-  secondary_vpc_id = data.terraform_remote_state.network_secondary.outputs.vpc_id
   secondary_instance_class = "db.r5.large"
   secondary_instance_count = 0
   primary_upgraded_instance_count = 0
   upgraded_secondary_instance_count = 0
   upgraded_instance_class = "db.r5.xlarge"
-  upgraded_promotion_tier = 1
   sns_info_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_info_sns_topic_arn
   sns_critical_topic_arn = data.terraform_remote_state.monitoring.outputs.paylater_core_critical_sns_topic_arn
   terraform_configuration = "paylater-containers"
